@@ -1,0 +1,68 @@
+/* Global styles */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f4f8;
+    overscroll-behavior: none;
+    display: grid;
+    place-items: center; /* Centers content vertically and horizontally */
+}
+
+/* Content container */
+#content {
+    display: flex; /* Using flexbox to stack items vertically */
+    flex-direction: column; /* Stack items in a vertical column */
+    align-items: center; /* Center the items horizontally */
+    text-align: center;
+    height: 100vh;
+    gap: 0; /* Remove any default spacing between flex items */
+    padding: 0; /* No padding between items */
+}
+
+#content > * {
+    margin-bottom: 10px;
+}
+
+
+/* Buttons */
+button {
+    cursor: pointer;
+    border: none;
+    padding: 5px 10px;
+    height: 34;
+    border-radius: 4px;
+    background-color: #3498db;
+    color: white;
+    font-size: 14px;
+    transition: background-color 0.3s, transform 0.2s;
+    box-sizing: border-box; /* Ensure padding is included in the element's height/width */
+}
+
+button:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+button:disabled,
+button:disabled:hover {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Loading spinner */
+.loading-spinner {
+    border: 8px solid #bdc3c7;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1.2s linear infinite;
+}
+
+/* Keyframes for spinning animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

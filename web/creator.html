@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--
+        Make the app responsive, and prevent user zoom
+        -->
+        <meta name="viewport" content="
+        width=device-width,
+        maximum-scale=0.9,
+        user-scalable=0
+        ">
+        <meta charset="UTF-8">
+        <title>Data Creator</title>
+        <link rel="icon" type="image/x-icon" href="img/icon/favicon.ico">
+        <link rel="stylesheet" href="styles/creator.css"/>
+    </head>
+    <body>
+
+        <div id="content">
+            <h1 id="titleContainer"></h1>
+            <div id="loadingContainer"></div>
+            <div id="advanceContainer"></div>
+            <div id="sketchPadContainer"></div>
+        </div>
+
+        <script src="js/RetrieveLabels.js"></script>
+        <script src="js/Data.js"></script>
+        <script src="js/SketchPad.js"></script>
+        <script src="js/AdvanceApp.js"></script>
+
+        <script>
+
+            let data, sketchPad, advanceApp;
+
+            /* Remove all DOM content on reset */
+            const clearApp = () => {
+                advanceContainer.innerHTML = '';
+                sketchPadContainer.innerHTML = '';
+
+                const oldRestartBtn = document.getElementById("restartBtn");
+                if (oldRestartBtn) { oldRestartBtn.remove(); }
+            }
+
+            /* Wait for HTML to be parsed before loading javascript */
+            document.addEventListener('DOMContentLoaded', () => {
+                titleContainer.textContent = "Data Creator"
+
+                const retrieveLabels = new RetrieveLabels(loadingContainer);
+
+                const restartApp = () => {
+                    /* Clear previous elements before loading new ones */
+                    clearApp();
+
+                    /* Wait for data labels, then load app */
+                    retrieveLabels.getLabels()
+                        .then((labels) => {
+                            data = new Data(); // Create session data
+                            sketchPad = new SketchPad(sketchPadContainer); // Create sketchpad for drawing data
+                            advanceApp = new AdvanceApp(advanceContainer, labels, data, sketchPad); // Create buttons to advance the app
+                        }).catch((error) => {
+                            console.error("No labels: ", error);
+                        }).finally(() => {
+                            const restartBtn = document.createElement("button");
+                            restartBtn.id = "restartBtn"; // Give an ID to find and remove on restart
+                            restartBtn.textContent = "RESTART";
+                            content.appendChild(restartBtn);
+                            restartBtn.addEventListener("click", () => { restartApp(); });
+                        });
+                }
+
+                restartApp();
+            });
+
+        </script>
+
+    </body>
+</html>
