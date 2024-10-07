@@ -8,7 +8,9 @@
 test/
 
 # Unprocessed Dataset
-data/
+data/raw/*
+data/dataset/img/*
+data/dataset/json/*
 
 # Dependencies
 node_modules
