@@ -18,15 +18,19 @@ fileNames.forEach(fn => {
     const content = fs.readFileSync(
         constants.RAW_DIR + "/" + fn
     );
-    /* Username in raw data is student, and order of data is different to that produced by data creator */
-    const {session, student, drawings} = JSON.parse(content);
+    /* 716 raw data files (5728 drawings) collected from https://github.com/gniziemazity/drawing-data/tree/main/data/raw
+    These data files are in a different format than those produced by the Data Creator:
+    "username" key is "student", and the key order is different.
+    The following code formats and destructures the data correctly */
+    const {session:user_id, student, username, drawings} = JSON.parse(content);
+    const user_name = username !== undefined ? username : student;
     for (let label in drawings) {
-        /* Write metadata for all samples to samples.json file in dataset folder*/
+        /* Write metadata for all samples to samples.json file in dataset folder */
         samples.push({
             id,
             label,
-            username:student,
-            user_id:session
+            user_name,
+            user_id
         });
 
         /* Write all drawing data to json dataset folder with ids */
