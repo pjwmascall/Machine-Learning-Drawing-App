@@ -88,7 +88,8 @@ function extractConvertData(files) {
 
 /* Code adapted from SketchPad.js */
 function generateImageFile(outFile, paths) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
     draw.paths(ctx, paths);
 
     const buffer = canvas.toBuffer("image/png");
