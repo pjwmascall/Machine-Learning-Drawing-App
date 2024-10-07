@@ -1,7 +1,17 @@
+# Environmental variables
 *.env
+
+# Log files
 *.log
+
+# Testing
 test/
-common/
+
+# Unprocessed Dataset
 data/
-node/
+
+# Dependencies
+node_modules
+
+# Old Versions
 oldversions/
