@@ -1,0 +1,5 @@
+# Ignore everything in data/dataset/img directory
+*
+
+# Except this file
+!.gitignore

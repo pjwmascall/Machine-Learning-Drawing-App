@@ -1,0 +1,5 @@
+# Ignore everything in data/dataset/json directory
+*
+
+# Except this file
+!.gitignore

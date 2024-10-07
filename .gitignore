@@ -7,11 +7,6 @@
 # Testing
 test/
 
-# Unprocessed Dataset
-data/raw/*
-data/dataset/img/*
-data/dataset/json/*
-
 # Dependencies
 node_modules
 
