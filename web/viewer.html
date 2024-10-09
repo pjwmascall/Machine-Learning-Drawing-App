@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Data Viewer</title>
+        <link rel="stylesheet" href="styles/creator.css" />
+        <link rel="stylesheet" href="styles/viewer.css" />
+    </head>
+    <body>
+        <h1>Data Viewer</h1>
+        <div id="container"></div>
+        <script src="../common/js_objects/samples.js"></script>
+        <script src="../common/constants.js"></script>
+        <script src="../common/utils.js"></script>
+        <script src="js/display.js"></script>
+
+        <script>
+            const groups = utils.groupBy(samples, "user_id");
+            
+            for (let user_id in groups) {
+                const samples = groups[user_id];
+                const userName = samples[0].user_name;
+                createRow(container, userName, samples);
+            }
+        </script>
+    </body>
+</html>
